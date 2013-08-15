@@ -1,0 +1,29 @@
+
+I has some issuses when using 
+https://github.com/andzdroid/paypal-ipn
+
+with meteor when try to use adaptive payment (parsing the json) so this is a workaround
+
+how to use:
+
+copy files to packages/ipn
+
+then 
+$ meteor add ipn
+
+then on startup
+
+add :
+
+
+var config = {
+    test_ipn:false,
+    onSuccess:function (buf) {
+
+        var ipnMsg = qs.parse(buf);
+        console.log("ipnMsg", ipnMsg.pay_key);
+
+    }
+}
+
+Meteor.PaypalIpn.configure(config);
